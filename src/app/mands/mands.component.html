@@ -1,0 +1,30 @@
+<h1> Manding </h1>
+<div *ngIf="rewardNow; else work">
+  <button (click)=rewarded()>Rewarded!</button>
+</div>
+<ng-template #work>
+<h2> Trials to run </h2>
+<table>
+<thead>
+  <td> Item </td><td>No Prompt</td><td>Prompted</td><td>Prompt Level</td>
+</thead>
+<tbody>
+  <tr *ngFor="let query of queries">
+    <td>{{query.query}}</td><td><button (click)=correct(query)>+</button></td><td><button (click)=prompted(query)>-</button></td><td>{{promptLevel}}</td>
+  </tr>
+</tbody>
+</table>
+<h2> Results </h2>
+<table>
+<thead>
+  <td> Item </td><td>Results</td><td>Correct</td>
+</thead>
+<tbody>
+  <tr *ngFor="let result of results">
+    <td>{{result.query}}</td><td>{{displayResults(result.results)}}</td><td><button (click)=correctLast(result)>Correct</button></td>
+  </tr>
+</tbody>
+</table>
+
+<h3> Send results</h3>
+</ng-template>
