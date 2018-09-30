@@ -1,3 +1,7 @@
+
+export class Result{
+
+}
 export class Trial{
   query: string;
   results: string[];
