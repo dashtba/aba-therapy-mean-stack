@@ -1,0 +1,32 @@
+
+<div>
+  <h2> Set teaching parameters here</h2>
+<input [(ngModel)]="tempString" placeholder="Most to Least"/>
+<button (click)="setPromptLevel()">Set Prompt Level</button>
+
+<input [(ngModel)]="tempNum" placeholder="3"/>
+<button (click)="setRewardInterval()">Set Reward Interval</button>
+</div>
+
+<div>
+  <h2> Add queries and probes here</h2>
+
+<input [(ngModel)]="tempQuery" placeholder="question"/>
+<button (click)="addQuery()">Add Query</button>
+
+
+<table>
+<thead>
+  <td> Item </td><td>No Prompt</td><td>Prompted</td><td>Prompt Level</td><td>Remove?</td>
+</thead>
+<tbody>
+  <tr *ngFor="let trial of newTrialSet.trials">
+    <td>{{trial.query}}</td><td><button (click)=correct(query)>+</button></td><td><button (click)=prompted(query)>-</button></td><td>{{newTrialSet.promptLevel}}</td><td><button (click)=remove(trial)>Remove</button></td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div>
+  <button (click)=pushToDb()>Add to Lesson Plan</button>
+</div>

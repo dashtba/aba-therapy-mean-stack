@@ -9,7 +9,7 @@ import {Trial} from '../trial';
 
 export class MandsComponent implements OnInit {
 
-  items =  ['Graham Crackers','Train Video','Blocks','Cookies','Ice cream','Go outside','Toy room'];
+  items =  ['What is your last name?','Who is your teacher?','What did you have for lunch?','Do you like cookies?','Who flies in space?','Who is your brother?','What do you see outside?'];
   numRight = 0;
   queries: Trial[] = []; //Should load these from DB
   displayList: Trial[] = []; //used to display top scoring queries for momentum
@@ -18,7 +18,7 @@ export class MandsComponent implements OnInit {
   numQuestionsBetweenRewards: number = 2;
 
   results: Trial[] = []; //Will update DB with these
-  promptLevel = "Maximal";
+  promptLevel = "Most to Least";
   rewardNow = false;
   constructor() { }
 
@@ -27,7 +27,7 @@ export class MandsComponent implements OnInit {
     //dummy data for testing
     for(let item of this.items)
     {
-      this.queries.push({'query':item,'results':['-','-','+'],'score':Math.random()});
+      this.queries.push({'query':item,'results':[],'score':Math.random()});
     }
     this.queries.sort((a,b)=>{return a.score - b.score})
     console.log(this.queries);
@@ -47,7 +47,8 @@ export class MandsComponent implements OnInit {
     this.queries.splice(this.queries.indexOf(item),1);
 
     //Step two: add the result of this trial
-    item.results.push('+');
+
+    item.results.push({'plusMinus':1,'date':Date.now()});
 
     //Step three: add the result to results array
     this.results.push(item);
@@ -62,7 +63,7 @@ export class MandsComponent implements OnInit {
     this.queries.splice(this.queries.indexOf(item),1);
 
     //Step two: add the result of this trial
-    item.results.push('-');
+    item.results.push({'plusMinus':0,'date':Date.now()});
 
     //Step three: add the result to results array
     this.results.push(item);
@@ -74,13 +75,13 @@ export class MandsComponent implements OnInit {
     var bit = this.results.splice(index,1);
     var val = bit[0].results[item.results.length-1];
 
-    if (val==='+')
+    if (val.plusMinus>0)
     {
-      bit[0].results[item.results.length - 1] = '-';
+      bit[0].results[item.results.length - 1].plusMinus = 0 ;
       console.log('change to minus',bit[0].results);
     }else
         {
-          bit[0].results[item.results.length - 1] = '+';
+          bit[0].results[item.results.length - 1].plusMinus = 1;
         }
     console.log('but now:',bit[0]);
     this.results.push(bit[0]);
@@ -89,18 +90,25 @@ export class MandsComponent implements OnInit {
 displayResults(allBits): string {
   var resultString = " | ";
   for(let bit of allBits){
-    resultString = resultString + bit +" | " ;
+    if(bit.plusMinus > 0)
+    {
+       resultString = resultString + '+' +" | " ;
+     }
+     else
+     {
+       resultString = resultString + '-' +" | " ;
+     }
   }
 
   return resultString;
 }
-  result(item: string): string {
-    for(let result of this.results){
-      if(result.query === item)
-      {
-        console.log('should print a result here')
-        return result.results[0];
-      }
-    }
-  }
+  // result(item: string): string {
+  //   for(let result of this.results){
+  //     if(result.query === item)
+  //     {
+  //       console.log('should print a result here')
+  //       return result.results[0];
+  //     }
+  //   }
+  // }
 }

@@ -1,6 +1,6 @@
 export class Result{
   plusMinus: number;
-  date: Date;
+  date: number;
 }
 
 export class Trial{
