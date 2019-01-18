@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {}
 import {Trial} from '../trial';
 import {TrialSet} from '../trial-set';
 
@@ -46,3 +45,4 @@ export class SetupTrialComponent implements OnInit {
   remove(query: Trial){
       this.newTrialSet.trials.splice(this.newTrialSet.trials.indexOf(query),1);
   }
+}
