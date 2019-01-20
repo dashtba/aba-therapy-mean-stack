@@ -6,12 +6,14 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MandsComponent } from './mands/mands.component';
 import { SetupTrialComponent } from './setup-trial/setup-trial.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LoadFilesComponent } from './load-files/load-files.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MandsComponent,
-    SetupTrialComponent
+    SetupTrialComponent,
+    LoadFilesComponent
   ],
   imports: [
     BrowserModule,
