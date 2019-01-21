@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Trial} from '../trial';
-
 @Component({
   selector: 'app-mands',
   templateUrl: './mands.component.html',
@@ -9,7 +8,6 @@ import {Trial} from '../trial';
 
 export class MandsComponent implements OnInit {
 
-  items =  ['What is your last name?','Who is your teacher?','What did you have for lunch?','Do you like cookies?','Who flies in space?','Who is your brother?','What do you see outside?'];
   numRight = 0;
   queries: Trial[] = []; //Should load these from DB
   displayList: Trial[] = []; //used to display top scoring queries for momentum
@@ -23,14 +21,6 @@ export class MandsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //Soon, this will load a Set from the DB, for now, let's make some
-    //dummy data for testing
-    for(let item of this.items)
-    {
-      this.queries.push({'query':item,'results':[],'score':Math.random()});
-    }
-    this.queries.sort((a,b)=>{return a.score - b.score})
-    console.log(this.queries);
   }
 
   rewarded(){
