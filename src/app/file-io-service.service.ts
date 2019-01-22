@@ -44,6 +44,6 @@ export class FileIoServiceService {
        }
      }
      //how do I throw an error properly?
-     return of({setName:"null"});
+     return of({setName:"null",promptLevel:"null",numQuestionsBetweenRewards:0,trials:[]});
    }
 }
